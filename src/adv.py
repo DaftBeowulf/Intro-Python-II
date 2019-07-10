@@ -1,25 +1,25 @@
 from player import Player
 from room import Room
-
+from images import images
 # Declare all the rooms
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons", images['outside']),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+passages run north and east.""", images['foyer']),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm."""),
+the distance, but there is no way across the chasm.""", images['overlook']),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+to north. The smell of gold permeates the air.""", images['narrow']),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
+earlier adventurers. The only exit is to the south.""", images['treasure']),
 }
 
 
@@ -51,20 +51,8 @@ player = Player(room['outside'])
 #
 # If the user enters "q", quit the game.
 
-
-def move(direction):
-    n = "n_to"
-    s = "s_to"
-    e = "e_to"
-    w = "w_to"
-    if True:
-        player.location = player.location["n_to"]
-    else:
-        print("You cannot go in that direction.")
-
-
 print(
-    f"\nCurrent room: {player.location.name}\n{player.location.description}\n")
+    f"\n{player.location.image}\nCurrent room: {player.location.name}\n{player.location.description}\n")
 user = input("Where do you go?\n[n] North\n[e] East\n[s] South\n[w] West\n")
 
 while True:
