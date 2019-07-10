@@ -1,3 +1,4 @@
+from player import Player
 from room import Room
 
 # Declare all the rooms
@@ -38,7 +39,7 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-
+player = Player(room['outside'])
 # Write a loop that:
 #
 # * Prints the current room name
@@ -49,3 +50,49 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+
+def move(direction):
+    n = "n_to"
+    s = "s_to"
+    e = "e_to"
+    w = "w_to"
+    if True:
+        player.location = player.location["n_to"]
+    else:
+        print("You cannot go in that direction.")
+
+
+print(
+    f"\nCurrent room: {player.location.name}\n{player.location.description}\n")
+user = input("Where do you go?\n[n] North\n[e] East\n[s] South\n[w] West\n")
+
+while True:
+    if user == "n":
+        if hasattr(player.location, "n_to"):
+            player.location = player.location.n_to
+        else:
+            print("You can't go that way -- try something else.")
+    elif user == "e":
+        if hasattr(player.location, "e_to"):
+            player.location = player.location.e_to
+        else:
+            print("You can't go that way -- try something else.")
+    elif user == "s":
+        if hasattr(player.location, "s_to"):
+            player.location = player.location.s_to
+        else:
+            print("You can't go that way -- try something else.")
+    elif user == "w":
+        if hasattr(player.location, "s_to"):
+            player.location = player.location.s_to
+        else:
+            print("You can't go that way -- try something else.")
+
+    if user == "q":
+        print("\nFarewell...\n")
+        break
+    print(
+        f"\nCurrent room: {player.location.name}\n{player.location.description}\n")
+    user = input(
+        "Where do you go?\n[n] North\n[e] East\n[s] South\n[w] West\n")
