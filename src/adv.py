@@ -1,11 +1,12 @@
 from player import Player
 from room import Room
 from images import images
+from item import items
 # Declare all the rooms
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons", images['outside']),
+                     "North of you, the cave mount beckons", images['outside'], [items['torch'], items['sword']]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east.""", images['foyer']),
@@ -39,7 +40,7 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-player = Player("Finn the Human", room['outside'])
+player = Player("Link", room['outside'])
 
 # Write a loop that:
 #
@@ -55,7 +56,8 @@ player = Player("Finn the Human", room['outside'])
 
 print(
     f"\n{player.location.image}\nCurrent room: {player.location.name}\n{player.location.description}\n")
-user = input("Where do you go?\n[n] North\n[e] East\n[s] South\n[w] West\n")
+user = input(
+    f"What do you do, {player.name}?\n[n] go north\n[e] go east\n[s] go south\n[w] go west\n[i] inspect\n")
 
 while True:
     if user == "n":
@@ -78,11 +80,12 @@ while True:
             player.location = player.location.s_to
         else:
             print("You can't go that way -- try something else.")
-
+    elif user == "i":
+        player.location.inspect()
     if user == "q":
         print("\nFarewell...\n")
         break
     print(
         f"\nCurrent room: {player.location.name}\n{player.location.description}\n")
     user = input(
-        "Where do you go?\n[n] North\n[e] East\n[s] South\n[w] West\n")
+        f"What do you do, {player.name}?\n[n] go north\n[e] go east\n[s] go south\n[w] go west\n[i] inspect\n")
