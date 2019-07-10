@@ -3,11 +3,12 @@
 
 
 class Room():
-    def __init__(self, name, description, image, items=[]):
+    def __init__(self, name, description, items=[], image="", searched=False):
         self.name = name
         self.description = description
         self.image = image
         self.items = items
+        self.searched = searched
 
     def inspect(self):
         if len(self.items) > 0:
