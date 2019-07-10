@@ -12,6 +12,5 @@ items = {"torch": Item(
     "map": Item("map", "A map of this dungeon."),
     "boss_key": Item("boss_key", "Unlocks the dungeon's final chamber."),
     "crate": Item("crate", "A large wooden crate. Don't hurt your back carrying this around!"),
-    "switch": Item("switch", "A steel pressure plate embedded in the floor. Looks like it needs to be weighed down to be activated."),
-    "unlit_torch": Item("unlit_torch", "An unlit, stationary torch. Maybe you can see better if it was lit?"),
-    "lit_torch": Item("lit_torch", "The torch has been lit and the way forward is clear!")}
+    "chest": Item("treasure chest", "A crimson and gold treasure chest, just waiting to be opened to have its contents retrieved.")
+}
