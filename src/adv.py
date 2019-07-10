@@ -39,7 +39,8 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-player = Player(room['outside'])
+player = Player("Finn the Human", room['outside'])
+
 # Write a loop that:
 #
 # * Prints the current room name
@@ -50,6 +51,7 @@ player = Player(room['outside'])
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
 
 print(
     f"\n{player.location.image}\nCurrent room: {player.location.name}\n{player.location.description}\n")
