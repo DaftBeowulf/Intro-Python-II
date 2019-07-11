@@ -62,10 +62,10 @@ while True:
         elif cmd == 'fight':
             if player.location.enemy:
                 fight(player.location.enemy)
-                if player.health > 0:
+                if player.location.enemy.health <= 0:
                     player.location.enemy = {}
                     player.location.clear_path()
-                else:
+                elif player.health <= 0:
                     print(images['game over'])
                     exit()
             else:
