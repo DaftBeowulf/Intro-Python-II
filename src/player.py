@@ -10,21 +10,28 @@ class Player():
         self.location = location
         self.inventory = inventory
 
+    def move(self, direction):
+        try:
+            self.location = getattr(self.location, f'{direction}_to')
+            self.inspect_room()
+        except:
+            print("You can't go that way -- try something else.")
+
     def get(self, obj):
-        result = any(elem.name == obj for elem in self.location.items)
-        if result:
+        available = any(elem.name == obj for elem in self.location.items)
+        if available:
             for i in self.location.items:
                 if i.name == obj:
                     self.location.items.remove(i)
             self.inventory.append(items[obj])
             items[obj].on_take()
-            self.location.searched = True
+            self.location.looted = True
         else:
             print("\nNo such item exists in this room.")
 
     def drop(self, obj):
-        result = any(elem.name == obj for elem in self.inventory)
-        if result:
+        held = any(elem.name == obj for elem in self.inventory)
+        if held:
             for i in self.inventory:
                 if i.name == obj:
                     self.inventory.remove(i)
@@ -35,28 +42,63 @@ class Player():
 
     def look_in_bag(self):
         if len(self.inventory) > 0:
-            print("\nDigging around in your bag, you find:")
+            print("\nDigging around in your bag, you find:\n")
             for item in self.inventory:
                 print(f"{item.name}")
         else:
             print(
-                "\nYou dig around in your bag and empty pockets--not an item or rupee in sight.")
+                "\nYou dig around in your bag and empty pockets--not an item or rupee in sight. You even dropped your map somewhere, geeze.")
 
     def inspect_room(self):
-        if not self.location.searched:
-            print(
-                f"\nCurrent room: {self.location.name}\n{self.location.description}\n")
-        else:
-            print(
-                f"\nCurrent room: {self.location.name}\n{self.location.looted}\n")
+        if len(self.location.looted_msg) > 0 and len(self.location.cleared_msg) > 0:
+            # currently only storage room has both
+            if not self.location.looted and not self.location.cleared:
+                print(
+                    f"\nCurrent room: {self.location.name}\n{self.location.description}\n")
+            elif self.location.looted and not self.location.cleared:
+                print(
+                    f"\nCurrent room: {self.location.name}\n{self.location.looted_msg}\n")
+            elif self.location.looted and self.location.cleared:
+                print(
+                    f"\nCurrent room: {self.location.name}\n{self.location.cleared_msg}\n")
+        elif len(self.location.looted_msg) > 0:
+            if not self.location.looted:
+                print(
+                    f"\nCurrent room: {self.location.name}\n{self.location.description}\n")
+            elif self.location.looted:
+                print(
+                    f"\nCurrent room: {self.location.name}\n{self.location.looted_msg}\n")
+        elif len(self.location.cleared_msg) > 0:
+            if not self.location.cleared:
+                print(
+                    f"\nCurrent room: {self.location.name}\n{self.location.description}\n")
+            elif self.location.cleared:
+                print(
+                    f"\nCurrent room: {self.location.name}\n{self.location.cleared_msg}\n")
 
     def inspect_item(self, obj):
-        result = any(elem.name == obj for elem in self.inventory)
-        if result:
+        held = any(elem.name == obj for elem in self.inventory)
+        if held:
             for i in self.inventory:
                 if i.name == obj:
                     i.inspect()
 
+        else:
+            print("\nYou don't have that in your inventory.")
+
+    def use(self, obj):
+        held = any(elem.name == obj for elem in self.inventory)
+        if held:
+            usable = any(
+                elem.name == obj for elem in self.location.interactive)
+            if usable:
+                for i in self.inventory:
+                    if i.name == obj:
+                        self.inventory.remove(i)
+                        i.use_item()
+                self.location.clear_path()
+            else:
+                print("\nI don't think you can use that here...")
         else:
             print("\nYou don't have that in your inventory.")
 
