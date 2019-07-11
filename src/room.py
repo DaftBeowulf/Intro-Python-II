@@ -2,6 +2,7 @@
 # description attributes.
 from item import items
 from images import images
+from enemy import enemies
 
 
 class Room():
@@ -16,6 +17,7 @@ class Room():
         self.next_room = next_room
         self.cleared = cleared
         self.cleared_msg = cleared_msg
+        self.enemy = []
 
     def clear_path(self):
         self.cleared = True
@@ -112,8 +114,12 @@ room['vault'].n_to = room['storage']
 room['overlook'].s_to = room['foyer']
 room['boss_door'].s_to = room['overlook']
 
+# Add enemies to rooms
+room['pool'].enemy = enemies['dodongo']
+room['boss_chamber'].enemy = enemies['ganon']
+
 # locked until conditions are met:
-room['pool'].n_to = room['treasure']
+# room['pool'].n_to = room['treasure']
 # room['storage'].s_to = room['vault']
 # room['overlook'].n_to = room['boss_door']
 # room['boss_door'].w_to = room['boss_chamber']

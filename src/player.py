@@ -2,13 +2,16 @@
 # currently.
 from item import items
 from images import images
+from character import Character
 
 
-class Player():
-    def __init__(self, name, location, inventory=[items['map']]):
+class Player(Character):
+    def __init__(self, name, location):
         self.name = name
         self.location = location
-        self.inventory = inventory
+        self.inventory = [items['map']]
+        self.equipped = []
+        super().__init__()
 
     def move(self, direction):
         try:
