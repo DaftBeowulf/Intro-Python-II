@@ -1,78 +1,46 @@
 from player import Player
 from images import images
 from room import room
-# Declare all the rooms
 
-# Link rooms together
-
-room['outside'].n_to = room['foyer']
-room['foyer'].s_to = room['outside']
-room['foyer'].n_to = room['overlook']
-room['foyer'].e_to = room['pool']
-room['foyer'].w_to = room['storage']
-room['pool'].w_to = room['foyer']
-room['treasure'].s_to = room['pool']
-room['storage'].e_to = room['foyer']
-room['vault'].n_to = room['storage']
-room['overlook'].s_to = room['foyer']
-room['boss_door'].s_to = room['overlook']
-
-# locked until conditions are met:
-room['pool'].n_to = room['treasure']
-room['storage'].s_to = room['vault']
-room['overlook'].n_to = room['boss_door']
-room['boss_door'].w_to = room['boss_chamber']
-
-#
-# Main
-#
+# Main file for running adventure
 
 # Make a new player object that is currently in the 'outside' room.
+# May come back to this to allow custom name
 player = Player("Link", room['outside'])
 
-# Write a loop that:
-#
-# * Prints the current room name
-# * Prints the current description (the textwrap module might be useful here).
-# * Waits for user input and decides what to do.
-#
-# If the user enters a cardinal direction, attempt to move to the room there.
-# Print an error message if the movement isn't allowed.
-#
-# If the user enters "q", quit the game.
+# Helper functions
+
+# Defines attempts at movement between rooms
 
 
+def move(direction):
+    try:
+        player.location = getattr(player.location, f'{direction}_to')
+        player.inspect_room()
+    except:
+        print("You can't go that way -- try something else.")
+
+
+# Initial prompt before game loop starts
 print(
     f"\n{player.location.image}\nCurrent room: {player.location.name}\n{player.location.description}\n")
 user = input(
     f"\nWhat do you do, {player.name}?\n(Type 'help' to see a list of commands)\n").split(' ')
+
+# Game loop
 while True:
+
+    # Group two-worded commands here
     if len(user) == 2:
         user = ' '.join(user)
         if user == 'go north':
-            if hasattr(player.location, "n_to"):
-                player.location = player.location.n_to
-                player.inspect_room()
-            else:
-                print("You can't go that way -- try something else.")
+            move('n')
         elif user == 'go east':
-            if hasattr(player.location, "e_to"):
-                player.location = player.location.e_to
-                player.inspect_room()
-            else:
-                print("You can't go that way -- try something else.")
+            move('e')
         elif user == 'go south':
-            if hasattr(player.location, "s_to"):
-                player.location = player.location.s_to
-                player.inspect_room()
-            else:
-                print("You can't go that way -- try something else.")
+            move('s')
         elif user == 'go west':
-            if hasattr(player.location, "w_to"):
-                player.location = player.location.w_to
-                player.inspect_room()
-            else:
-                print("You can't go that way -- try something else.")
+            move('w')
         elif "get" in user or 'take' in user:
             player.get(user.split(' ')[1])
         elif "drop" in user:
@@ -82,6 +50,8 @@ while True:
 
         else:
             print("\nDoes not compute, try another command.\n")
+
+    # One-worded commands here
     elif len(user) == 1:
         user = "".join(user)
         if user == "q":
@@ -91,16 +61,16 @@ while True:
             player.look_in_bag()
         elif user == "inspect":
             player.inspect_room()
-        elif user == "map":
+        elif user == "m" or user == "map":
             player.map()
         elif user == 'help':
-            print("""\ngo <direction> -- moves player to another room
-inspect [item] -- inspect an item in your inventory, or the current room 
-get/take <item> -- pick up an item and add it to player inventory
-drop <item> -- drop an item from player inventory
-use <item> -- use an item from player inventory
-i/inventory -- list all items currently held by player\n""")
+            print(images['help'])
         else:
             print("\nDoes not compute, try another command.\n")
+
+    # Catch empty or longer commands
+    else:
+        print("\nDoes not compute, try another command.\n")
+    # Await new command after previous output
     user = input(
         f"\nWhat do you do, {player.name}?\n(Type 'help' to see a list of commands)\n").split(' ')

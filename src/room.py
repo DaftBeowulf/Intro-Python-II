@@ -14,9 +14,10 @@ class Room():
         self.looted = looted
 
 
+# Declare all the rooms
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "\nNorth of you, the cave mount beckons. A torch is set in the wall next to the entrance.",
+                     "\nNorth of you, the dungeon entrance beckons. A torch is set in the wall next to the entrance.",
                      [items['torch']], images['outside'],
                      looted="\nNorth of you, the cave mount beckons. There's an empty hole in the wall where the torch was once set."),
 
@@ -79,3 +80,22 @@ to illuminate the legendary blade set into the pedestal--the Master Sword!""",
                   [items['master_sword']],
                   looted="""\nWith the pedestal empty and the Master Sword in your grasp, there's nothing of interest here.""")
 }
+
+# Link rooms together
+room['outside'].n_to = room['foyer']
+room['foyer'].s_to = room['outside']
+room['foyer'].n_to = room['overlook']
+room['foyer'].e_to = room['pool']
+room['foyer'].w_to = room['storage']
+room['pool'].w_to = room['foyer']
+room['treasure'].s_to = room['pool']
+room['storage'].e_to = room['foyer']
+room['vault'].n_to = room['storage']
+room['overlook'].s_to = room['foyer']
+room['boss_door'].s_to = room['overlook']
+
+# locked until conditions are met:
+room['pool'].n_to = room['treasure']
+room['storage'].s_to = room['vault']
+room['overlook'].n_to = room['boss_door']
+room['boss_door'].w_to = room['boss_chamber']
