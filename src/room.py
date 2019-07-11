@@ -76,6 +76,7 @@ The great evil has been defeated... for now."""),
 To the north, a small alcove is embedded in the wall with a treasure chest inside.
 A snarling dodongo blocks your path to the chest.""",
                  cleared=False,
+                 next_room={'direction': 'n', 'name': 'treasure'},
                  cleared_msg="""\nA hole in the cavern's ceiling illuminates a crystal-clear pool of water.
 To the north, a small alcove is embedded in the wall with a treasure chest inside.
 The path to the chest is clear now that the dodongo has been slain."""),

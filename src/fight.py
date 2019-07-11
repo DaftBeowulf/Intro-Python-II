@@ -1,6 +1,8 @@
-from adv import player
+from player import player
 from enemy import enemies
-from image import images
+from images import images
+
+test = "test"
 
 
 def fight(enemy):
@@ -11,15 +13,12 @@ def fight(enemy):
 
 # fight loop
     while player.health > 0 and enemy.health > 0:
-        if len(cmd == 1):
+        if len(cmd) == 1:
             cmd = ''.join(cmd)
             if cmd == "attack":
                 player.attack(enemy)
                 if enemy.health > 0:
                     enemy.attack(player)
-                else:
-                    player.location.enemies = []
-                    player.location.cleared = True
             elif cmd == "defend":
                 player.defense = player.defense * 2
                 enemy.attack(player)
@@ -27,14 +26,24 @@ def fight(enemy):
             elif cmd == 'navi':
                 print(images['battle navi'])
             elif cmd == 'q':
-                print("COWARD!")
+                print("\nCOWARD!")
                 exit()
+            elif cmd == 'escape':
+                if enemy.name == 'ganon':
+                    print(
+                        f'\nBooming laughter fills the chamber as Ganon mocks your attempt to run away.\nThere\'s no escape, brat!')
+                else:
+                    print(f'\nYou successfully run from battle!')
+                    break
             else:
                 print(
-                    f"Stay focused, {player.name}! You can't do anything else until the battle is over!")
+                    f"\nStay focused, {player.name}! You can't do anything else until the battle is over!")
         else:
             print("\nHey! Invalid command, try something else.\n")
 
         # await new command
-        cmd = input(
-            f"\nWatch out, {player.name}!\n(Listen! Type 'navi' to see a list of battle commands)\n").split(' ')
+        if player.health > 0 and enemy.health > 0:
+            cmd = input(
+                f"\nWatch out, {player.name}!\n(Listen! Type 'navi' to see a list of battle commands)\n").split(' ')
+        else:
+            break

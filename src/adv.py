@@ -1,12 +1,9 @@
-from player import Player
+from player import player
 from images import images
 from room import room
+from fight import fight
 
 # Main file for running adventure
-
-# Make a new player object that is currently in the 'outside' room.
-# May come back to this to allow custom name
-player = Player("Link", room['outside'])
 
 # Initial prompt before game loop starts
 print(
@@ -63,7 +60,16 @@ while True:
         elif cmd == 'navi':
             print(images['navi'])
         elif cmd == 'fight':
-            player.attack()
+            if player.location.enemy:
+                fight(player.location.enemy)
+                if player.health > 0:
+                    player.location.enemy = {}
+                    player.location.clear_path()
+                else:
+                    print(images['game over'])
+                    exit()
+            else:
+                print("\nFight what? There's nobody else here.")
         else:
             print("\nHey! Invalid command, try something else.\n")
 

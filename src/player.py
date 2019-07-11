@@ -3,6 +3,7 @@
 from item import items
 from images import images
 from character import Character
+from room import room
 
 
 class Player(Character):
@@ -111,3 +112,8 @@ class Player(Character):
                 f"\n{images['map']}\nYou take out your map and inspect the area.")
         else:
             print("\nUhh, did you drop your map? Why would you do that?")
+
+
+# Make a new player object that is currently in the 'outside' room.
+# May come back to this to allow custom name
+player = Player("Link", room['outside'])

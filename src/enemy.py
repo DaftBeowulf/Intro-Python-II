@@ -12,5 +12,6 @@ enemies = {
     'dodongo': Enemy('dodongo')
 }
 
-enemies['ganon'].attack = 30
+enemies['ganon'].power = 30
 enemies['ganon'].defense = 15
+enemies['dodongo'].health = 50
