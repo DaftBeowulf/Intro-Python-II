@@ -5,7 +5,7 @@ from images import images
 
 
 class Player():
-    def __init__(self, name, location, inventory=[]):
+    def __init__(self, name, location, inventory=[items['map']]):
         self.name = name
         self.location = location
         self.inventory = inventory
@@ -61,6 +61,8 @@ class Player():
             print("\nYou don't have that in your inventory.")
 
     def map(self):
-        if not any(elem.name == 'map' for elem in self.inventory):
+        if any(elem.name == 'map' for elem in self.inventory):
             print(
                 f"\n{images['map']}\nYou take out your map and inspect the area.")
+        else:
+            print("\nUhh, did you drop your map? Why would you do that?")
