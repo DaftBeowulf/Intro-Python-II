@@ -25,7 +25,7 @@ def move(direction):
 print(
     f"\n{player.location.image}\nCurrent room: {player.location.name}\n{player.location.description}\n")
 user = input(
-    f"\nWhat do you do, {player.name}?\n(Type 'help' to see a list of commands)\n").split(' ')
+    f"\nWhat do you do, {player.name}?\n(Listen! Type 'help' to see a list of commands)\n").split(' ')
 
 # Game loop
 while True:
@@ -49,7 +49,7 @@ while True:
             player.inspect_item(user.split(' ')[1])
 
         else:
-            print("\nDoes not compute, try another command.\n")
+            print("\nInvalid command, try something else.\n")
 
     # One-worded commands here
     elif len(user) == 1:
@@ -66,11 +66,11 @@ while True:
         elif user == 'help':
             print(images['help'])
         else:
-            print("\nDoes not compute, try another command.\n")
+            print("\nInvalid command, try something else.\n")
 
     # Catch empty or longer commands
     else:
-        print("\nDoes not compute, try another command.\n")
+        print("\nInvalid command, try something else.\n")
     # Await new command after previous output
     user = input(
-        f"\nWhat do you do, {player.name}?\n(Type 'help' to see a list of commands)\n").split(' ')
+        f"\nWhat do you do, {player.name}?\n(Listen! Type 'help' to see a list of commands.)\n").split(' ')
