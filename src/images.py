@@ -75,9 +75,10 @@ images = {
 *  get/take <item>:           pick up an item and add it to player inventory  *
 *  drop <item>:                           drop an item from player inventory  *
 *  use <item>:                             use an item from player inventory  *
-*  [i] - inventory:      list all items currently held in player's inventory  *
-*  [m] - map:                                       displays the dungeon map  *
-*  [s] - stats:                                            view player stats  *
+*  [i] inventory:      list all items currently held in player's inventory    *
+*  [m] map:                                       displays the dungeon map    *
+*  [s] stats:                                            view player stats    *
+*  [q] quit:                      exit the game (progress will NOT be saved)  *
 *                                                                             *
  *****************************************************************************
 """,
@@ -100,10 +101,11 @@ images = {
 *                                 .' , '.                                     *
 *                                '..'|'..'                                    *
 *                                                                             *
-*  attack:                attack the enemy--find a weapon to increase damage  *
-*  defend:     take half damage next turn--find a shield to increase defense  * 
-*  escape:         run away from the battle--not all enemies can be escaped!  *
-*  [s] - stats:                                            view player stats  * 
+*  [a] attack:                attack enemy--find a weapon to increase ATK     *
+*  [d] defend:     take half damage next turn--find a shield to increase DEF  * 
+*  [e] escape:         run away from battle--not all enemies can be escaped!  *
+*  [s] stats:                                            view player stats    * 
+*  [q] quit:                      exit the game (progress will NOT be saved)  *
 *                                                                             * 
  *****************************************************************************
 """,

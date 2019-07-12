@@ -42,18 +42,18 @@ while True:
     # One-worded commands here
     elif len(cmd) == 1:
         cmd = "".join(cmd)
-        if cmd == "q":
+        if cmd == "q" or cmd == "quit":
             print("\nFarewell...\n")
             break
-        elif cmd == "i":
+        elif cmd == "i" or cmd == "inventory":
             player.look_in_bag()
         elif cmd == "inspect":
             player.inspect_room()
-        elif cmd == "m":
+        elif cmd == "m" or cmd == "map":
             player.map()
         elif cmd == 'navi':
             print(images['navi'])
-        elif cmd == 's':
+        elif cmd == 's' or cmd == "stats":
             print(player)
         elif cmd == 'fight':
             if player.location.enemy:

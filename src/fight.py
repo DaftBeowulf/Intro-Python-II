@@ -13,22 +13,22 @@ def fight(enemy):
     while player.health > 0 and enemy.health > 0:
         if len(cmd) == 1:
             cmd = ''.join(cmd)
-            if cmd == "attack":
+            if cmd == "a" or cmd == "attack":
                 player.attack(enemy)
                 if enemy.health > 0:
                     enemy.attack(player)
-            elif cmd == "defend":
+            elif cmd == "d" or cmd == "defend":
                 player.defense = player.defense * 2
                 enemy.attack(player)
                 player.defense = player.defense // 2
             elif cmd == 'navi':
                 print(images['battle navi'])
-            elif cmd == 's':
+            elif cmd == "s" or cmd == 'stats':
                 print(player)
             elif cmd == 'q':
                 print("\nCOWARD!")
                 exit()
-            elif cmd == 'escape':
+            elif cmd == "e" or cmd == 'escape':
                 if enemy.name == 'ganon':
                     print(
                         f'\nBooming laughter fills the chamber as Ganon mocks your attempt to run away.\nThere\'s no escape, brat!')
