@@ -13,6 +13,12 @@ class Player(Character):
         self.inventory = [items['map']]
         super().__init__()
 
+    def __str__(self):
+        return f"""\n{self.name}
+{self.health}/100 HP
+{self.power} ATK
+{self.defense} DEF"""
+
     def move(self, direction):
         try:
             self.location = getattr(self.location, f'{direction}_to')
@@ -26,7 +32,10 @@ class Player(Character):
             for i in self.location.items:
                 if i.name == obj:
                     self.location.items.remove(i)
+                if obj == 'master sword' and any(el.name == 'sword' for el in self.inventory):
+                    self.drop('sword')
             self.inventory.append(items[obj])
+            self.update_stats()
             items[obj].on_take()
             self.location.looted = True
         else:
@@ -39,9 +48,18 @@ class Player(Character):
                 if i.name == obj:
                     self.inventory.remove(i)
             self.location.items.append(items[obj])
+            self.update_stats()
             items[obj].on_drop()
         else:
             print("\nYou don't have that in your inventory.")
+
+    def update_stats(self):
+        self.power = 20
+        self.defense = 10
+        for i in self.inventory:
+            if i.type == 'equip':
+                self.power += i.power
+                self.defense += i.defense
 
     def look_in_bag(self):
         if len(self.inventory) > 0:

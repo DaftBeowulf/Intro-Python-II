@@ -27,30 +27,31 @@ class Room():
 
 # Declare all the rooms
 room = {
-    'outside':  Room("Outside Cave Entrance",
+    'outside':  Room("Outside Dungeon Entrance",
                      "\nNorth of you, the entrance to Ganon's lair beckons. A torch is set in the wall next to the entrance.",
                      [items['torch']], images['outside'],
                      looted_msg="\nNorth of you, the entrance to Ganon's lair beckons. There's an empty hole in the wall where the torch was once set."),
 
-    'foyer': Room("Foyer", """\nDim light filters in from the south. Dusty passages run north and east, and 
-a small set of stairs leads down into west. The skeletal remains of a fallen warrior 
-are nearby, sword and shield still gripped tightly.""",
+    'foyer': Room("Dungeon Entrance", """\nDim light filters in from the south. 
+Dusty passages run north and east, and a small set of stairs leads down into west. 
+The skeletal remains of a fallen warrior are nearby, sword and shield still gripped tightly.""",
                   [items['sword'], items['shield']],
-                  looted_msg="""\nDim light filters in from the south. Dusty passages run north and east, and a small 
-set of stairs leads down into west. The skeleton's hands are now empty."""),
+                  looted_msg="""\nDim light filters in from the south. 
+Dusty passages run north and east, and a small set of stairs leads down into west. 
+The skeleton's hands are now empty."""),
 
-    'overlook': Room("Grand Overlook", """\nA steep cliff appears before you, falling
+    'overlook': Room("Bridge", """\nA steep cliff appears before you, falling
 away into the darkness. Ahead to the north, 
 a light flickers on the other side of the impassable chasm. 
 The vague impression of a raised drawbridge is barely visible.
-An unlit torch stands next to the edge.""",
+An unlit torch stands next to the edge near you.""",
                      cleared_msg="""\nA steep cliff appears before you, falling
 away into the darkness. The torch has been lit and the way north across the bridge is clear!""",
                      cleared=False,
                      interactive=[items['torch']],
                      next_room={'direction': 'n', 'name': 'boss_door'}),
 
-    'boss_door': Room("Boss Door", """\nAn imposing, giant door blocks your path north. 
+    'boss_door': Room("Door", """\nAn imposing, giant door blocks your path west. 
 Black chains cover its surface, all connected to a 
 shining gold lock in the shape of a horned demon skull. 
 You cannot go forward without a key.""",
@@ -62,7 +63,7 @@ west is clear... if you dare.
                       interactive=[items['key']],
                       next_room={'direction': 'w', 'name': 'boss_chamber'}),
 
-    'boss_chamber': Room("Boss Room", """\nThe door slams shut behind you as you enter. 
+    'boss_chamber': Room("Boss Chamber", """\nThe door slams shut behind you as you enter. 
 You are in a dimly-lit, immense circular chamber with no other exits. 
 Out of the darkness, a voice laughs menacingly.
 'So, you've finally arrived... time to die like the insect you are!'
@@ -88,8 +89,8 @@ The path to the chest is clear now that the dodongo has been slain."""),
 A steel plate lies in the corner of the room, embedded into the floor.""",
                     [items['crate']],
                     cleared_msg="""\nThe switch has been weighed down with the crate, 
-    and an eerie passageway has appeared in the southern wall.
-    An ethereal glow can be seen, gently piercing the darkness within.""",
+and an eerie passageway has appeared in the southern wall.
+An ethereal glow can be seen, gently piercing the darkness within.""",
                     interactive=[items['crate']],
                     next_room={'direction': 's', 'name': 'vault'},
                     cleared=False,

@@ -17,18 +17,7 @@ while True:
     def what(string):
         return string[string.find(' ')+1:]
 
-    # # Custom three-worded command for getting/dropping master sword
-    # if len(cmd) == 3:
-    #     cmd = ' '.join(cmd)
-    #     if cmd == "get master sword" or cmd == "take master sword":
-    #         print('check')
-    #         player.get('master sword')
-    #     if cmd == "drop master sword":
-    #         player.drop('master sword')
-    #     if cmd == "inspect master sword":
-    #         player.inspect_item('master sword')
-
-    # Group two-worded commands here
+    # Group multi-worded commands here
     if len(cmd) > 1:
         cmd = ' '.join(cmd)
         if cmd == 'go north':
@@ -56,24 +45,19 @@ while True:
         if cmd == "q":
             print("\nFarewell...\n")
             break
-        elif cmd == "i" or cmd == "inventory":
+        elif cmd == "i":
             player.look_in_bag()
         elif cmd == "inspect":
             player.inspect_room()
-        elif cmd == "m" or cmd == "map":
+        elif cmd == "m":
             player.map()
         elif cmd == 'navi':
             print(images['navi'])
+        elif cmd == 's':
+            print(player)
         elif cmd == 'fight':
             if player.location.enemy:
                 fight(player.location.enemy)
-                if player.location.enemy.health <= 0:
-                    player.location.enemy = {}
-                    player.location.clear_path()
-                elif player.health <= 0:
-                    print(
-                        images['game over'], "\nYou died! Maybe try again after you find some better equipment?")
-                    exit()
             else:
                 print("\nFight what? There's nobody else here.")
         else:

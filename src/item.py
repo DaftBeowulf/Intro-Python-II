@@ -22,13 +22,14 @@ class Item():
 
 class Equipment(Item):
     def __init__(self, name, description, action="", power=0, defense=0):
+        super().__init__(name, description, action)
         self.type = 'equip'
         self.power = power
         self.defense = defense
-        super().__init__(name, description, action)
 
     def __str__(self):
         return f"""\n{self.description}
+            {self.type}
 +{self.power} ATK
 +{self.defense} DEF"""
 
@@ -45,12 +46,12 @@ The way north across the bridge is clear!"""),
     "key": Item("key", "The Boss key! Unlocks the dungeon's final chamber.",
                 """You insert the golden Boss key into the imposing lock on the door. 
 With great effort, it turns and you hear the lock's tumblers clicking. 
-The lock falls to the floor, the chains which had been covering the door 
-likewise falling uselessly to the door. The way west is clear...
+The lock falls away, the chains which had been covering the door 
+likewise falling uselessly to the ground. The way west is clear...
 Do not go further unless you're certain you've collected everything in the dungeon!"""),
     "crate": Item("crate", "A large wooden crate. Don't hurt your back carrying this around!",
                   """With a grunt of effort, you slide the large crate onto the steel plate. 
-    The weight makes the plate sink further into the floor, and a sudden sound 
-    of stone grinding on stone draws your attention. The southern wall of the room has opened, 
-    revealing a set of stairs leading down away from you."""),
+The weight makes the plate sink further into the floor, and a sudden sound 
+of stone grinding on stone draws your attention. The southern wall of the room has opened, 
+revealing a set of stairs leading down away from you."""),
 }

@@ -75,8 +75,10 @@ images = {
 *  get/take <item>:           pick up an item and add it to player inventory  *
 *  drop <item>:                           drop an item from player inventory  *
 *  use <item>:                             use an item from player inventory  *
-*  i/inventory:                      list all items currently held by player  *
-*  m/map:                                           displays the dungeon map  *
+*  [i] - inventory:      list all items currently held in player's inventory  *
+*  [m] - map:                                       displays the dungeon map  *
+*  [s] - stats:                                            view player stats  *
+*                                                                             *
  *****************************************************************************
 """,
     'battle navi': """
@@ -101,6 +103,8 @@ images = {
 *  attack:                attack the enemy--find a weapon to increase damage  *
 *  defend:     take half damage next turn--find a shield to increase defense  * 
 *  escape:         run away from the battle--not all enemies can be escaped!  *
+*  [s] - stats:                                            view player stats  * 
+*                                                                             * 
  *****************************************************************************
 """,
     'game over': """
@@ -115,5 +119,23 @@ images = {
 * (_______)|/     \||/     \|(_______/  (_______)   \_/   (_______/|/   \__/ *
 *                                                                            *
  *****************************************************************************
-"""
+""",
+    'triforce': """
+ **************************
+*      \     /\     /      *
+*   \   \   /  \   /   /   *
+*    \     /    \     /    *
+*     \   /      \   /     *
+*  \     /        \     /  *
+*   \   /__________\   /   *
+*      /\__________/\      *
+*     /  \        /  \     *
+*    /    \      /    \    *
+*   /      \    /      \   *
+*  /        \  /        \  *
+* /__________\/__________\ *
+* \__________/\__________/ *
+*                          * 
+ **************************
+ """
 }

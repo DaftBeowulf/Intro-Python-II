@@ -23,6 +23,8 @@ def fight(enemy):
                 player.defense = player.defense // 2
             elif cmd == 'navi':
                 print(images['battle navi'])
+            elif cmd == 's':
+                print(player)
             elif cmd == 'q':
                 print("\nCOWARD!")
                 exit()
@@ -45,3 +47,17 @@ def fight(enemy):
                 f"\nWatch out, {player.name}!\n(Listen! Type 'navi' to see a list of battle commands)\n").split(' ')
         else:
             break
+
+    if enemy.health <= 0 and not enemy.name == 'Ganon':
+        player.location.enemy = {}
+        player.location.clear_path()
+    if enemy.health <= 0 and enemy.name == 'Ganon':
+
+        print("""\nGanon has been defeated, you beat the game! 
+Wait... a golden glow shines from above, 
+and a holy object from the Goddesses floats down towards you...!""", images['triforce'], """\nYou got the Triforce! Thanks for playing :)""")
+        exit()
+    elif player.health <= 0:
+        print(
+            images['game over'], "\nYou died! Maybe try again after you find some better equipment?")
+        exit()
