@@ -8,8 +8,8 @@ class Enemy(Character):
 
 
 enemies = {
-    'ganon': Enemy('ganon'),
-    'dodongo': Enemy('dodongo')
+    'ganon': Enemy('Ganon'),
+    'dodongo': Enemy('Dodongo')
 }
 
 enemies['ganon'].power = 30

@@ -11,7 +11,6 @@ class Player(Character):
         self.name = name
         self.location = location
         self.inventory = [items['map']]
-        self.equipped = []
         super().__init__()
 
     def move(self, direction):
@@ -85,7 +84,8 @@ class Player(Character):
         if held:
             for i in self.inventory:
                 if i.name == obj:
-                    i.inspect()
+                    # i.inspect()
+                    print(i)
 
         else:
             print("\nYou don't have that in your inventory.")

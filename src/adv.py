@@ -14,17 +14,22 @@ cmd = input(
 # Game loop
 while True:
 
-    # Custom three-worded command for getting/dropping master sword
-    if len(cmd) == 3:
-        cmd = ' '.join(cmd)
-        if cmd == "get master sword" or cmd == "take master sword":
-            print('check')
-            player.get('master sword')
-        if cmd == "drop master sword":
-            player.drop('master sword')
+    def what(string):
+        return string[string.find(' ')+1:]
+
+    # # Custom three-worded command for getting/dropping master sword
+    # if len(cmd) == 3:
+    #     cmd = ' '.join(cmd)
+    #     if cmd == "get master sword" or cmd == "take master sword":
+    #         print('check')
+    #         player.get('master sword')
+    #     if cmd == "drop master sword":
+    #         player.drop('master sword')
+    #     if cmd == "inspect master sword":
+    #         player.inspect_item('master sword')
 
     # Group two-worded commands here
-    elif len(cmd) == 2:
+    if len(cmd) > 1:
         cmd = ' '.join(cmd)
         if cmd == 'go north':
             player.move('n')
@@ -35,13 +40,13 @@ while True:
         elif cmd == 'go west':
             player.move('w')
         elif "get" in cmd or 'take' in cmd:
-            player.get(cmd.split(' ')[1])
+            player.get(what(cmd))
         elif "drop" in cmd:
-            player.drop(cmd.split(' ')[1])
+            player.drop(what(cmd))
         elif "inspect" in cmd:
-            player.inspect_item(cmd.split(' ')[1])
+            player.inspect_item(what(cmd))
         elif "use" in cmd:
-            player.use(cmd.split(' ')[1])
+            player.use(what(cmd))
         else:
             print("\nHey! Invalid command, try something else.\n")
 
@@ -66,7 +71,8 @@ while True:
                     player.location.enemy = {}
                     player.location.clear_path()
                 elif player.health <= 0:
-                    print(images['game over'])
+                    print(
+                        images['game over'], "\nYou died! Maybe try again after you find some better equipment?")
                     exit()
             else:
                 print("\nFight what? There's nobody else here.")

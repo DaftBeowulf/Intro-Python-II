@@ -2,8 +2,6 @@ from player import player
 from enemy import enemies
 from images import images
 
-test = "test"
-
 
 def fight(enemy):
     print(

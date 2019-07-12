@@ -28,9 +28,9 @@ class Room():
 # Declare all the rooms
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "\nNorth of you, the dungeon entrance beckons. A torch is set in the wall next to the entrance.",
+                     "\nNorth of you, the entrance to Ganon's lair beckons. A torch is set in the wall next to the entrance.",
                      [items['torch']], images['outside'],
-                     looted_msg="\nNorth of you, the cave mount beckons. There's an empty hole in the wall where the torch was once set."),
+                     looted_msg="\nNorth of you, the entrance to Ganon's lair beckons. There's an empty hole in the wall where the torch was once set."),
 
     'foyer': Room("Foyer", """\nDim light filters in from the south. Dusty passages run north and east, and 
 a small set of stairs leads down into west. The skeletal remains of a fallen warrior 
