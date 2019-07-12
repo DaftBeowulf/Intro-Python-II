@@ -1,51 +1,71 @@
-from room import Room
+from player import player
+from images import images
+from room import room
+from fight import fight
 
-# Declare all the rooms
+# Main file for running adventure
 
-room = {
-    'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+# Initial prompt before game loop starts
+print(
+    f"\n{player.location.image}\nCurrent room: {player.location.name}\n{player.location.description}\n")
+cmd = input(
+    f"\nWhat do you do, {player.name}?\n(Listen! Type 'navi' to see a list of commands)\n").split(' ')
 
-    'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+# Game loop
+while True:
 
-    'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
-into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm."""),
+    def what(string):
+        return string[string.find(' ')+1:]
 
-    'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+    # Group multi-worded commands here
+    if len(cmd) > 1:
+        cmd = ' '.join(cmd)
+        if cmd == 'go north':
+            player.move('n')
+        elif cmd == 'go east':
+            player.move('e')
+        elif cmd == 'go south':
+            player.move('s')
+        elif cmd == 'go west':
+            player.move('w')
+        elif "get" in cmd or 'take' in cmd:
+            player.get(what(cmd))
+        elif "drop" in cmd:
+            player.drop(what(cmd))
+        elif "inspect" in cmd:
+            player.inspect_item(what(cmd))
+        elif "use" in cmd:
+            player.use(what(cmd))
+        else:
+            print("\nHey! Invalid command, try something else.\n")
 
-    'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
-chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
-}
+    # One-worded commands here
+    elif len(cmd) == 1:
+        cmd = "".join(cmd)
+        if cmd == "q" or cmd == "quit":
+            print("\nFarewell...\n")
+            break
+        elif cmd == "i" or cmd == "inventory":
+            player.look_in_bag()
+        elif cmd == "inspect":
+            player.inspect_room()
+        elif cmd == "m" or cmd == "map":
+            player.map()
+        elif cmd == 'navi':
+            print(images['navi'])
+        elif cmd == 's' or cmd == "stats":
+            print(player)
+        elif cmd == 'fight':
+            if player.location.enemy:
+                fight(player.location.enemy)
+            else:
+                print("\nFight what? There's nobody else here.")
+        else:
+            print("\nHey! Invalid command, try something else.\n")
 
-
-# Link rooms together
-
-room['outside'].n_to = room['foyer']
-room['foyer'].s_to = room['outside']
-room['foyer'].n_to = room['overlook']
-room['foyer'].e_to = room['narrow']
-room['overlook'].s_to = room['foyer']
-room['narrow'].w_to = room['foyer']
-room['narrow'].n_to = room['treasure']
-room['treasure'].s_to = room['narrow']
-
-#
-# Main
-#
-
-# Make a new player object that is currently in the 'outside' room.
-
-# Write a loop that:
-#
-# * Prints the current room name
-# * Prints the current description (the textwrap module might be useful here).
-# * Waits for user input and decides what to do.
-#
-# If the user enters a cardinal direction, attempt to move to the room there.
-# Print an error message if the movement isn't allowed.
-#
-# If the user enters "q", quit the game.
+    # Catch empty or longer commands
+    else:
+        print("\nHey! Invalid command, try something else.\n")
+    # Await new command after previous output
+    cmd = input(
+        f"\nWhat do you do, {player.name}?\n(Listen! Type 'navi' to see a list of commands.)\n").split(' ')
